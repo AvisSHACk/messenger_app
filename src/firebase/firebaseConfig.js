@@ -1,17 +1,28 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBXpiyTbF3qTYgg14z_S7c3sIqmS6iTlHo",
-  authDomain: "messenger-app-ef17b.firebaseapp.com",
-  projectId: "messenger-app-ef17b",
-  storageBucket: "messenger-app-ef17b.appspot.com",
-  messagingSenderId: "823714161212",
-  appId: "1:823714161212:web:7641002d626f0f49299939"
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+export {
+  auth, 
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+}
