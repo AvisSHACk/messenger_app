@@ -1,0 +1,29 @@
+$vars:(
+    firstColor:#292c43,
+    secondColor: #32354b,
+    accentColor: #7540ed,
+    borderColor:#BEBEBE,
+    borderColor2: #747D8C,
+    bgColor: #dddddd,
+    buttonColor:#007acc,
+    textColor:#212121,
+    textColorLight: #fff
+);
+
+$firstColor:map-get($vars, firstColor);
+$firstColorDark:map-get($vars, firstColorDark);
+$secondColor:map-get($vars, secondColor);
+$accentColor: map-get($vars, accentColor);
+$buttonColor:map-get($vars, buttonColor);
+$borderColor2: map-get($vars, borderColor2);
+$borderColor: map-get($vars, borderColor);
+$bgColor: map-get($vars, bgColor);
+$bgColorDark: map-get($vars, bgColorDark);
+$textColor:map-get($vars, textColor);
+$textColorLight:map-get($vars, textColorLight);
+
+:root {
+    @each $key, $value in $vars {
+        --#{$key}: #{$value};
+    }
+}

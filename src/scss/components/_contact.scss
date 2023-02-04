@@ -1,0 +1,31 @@
+.Contact {
+    display: flex;
+    align-items: center;
+    background-color: $secondColor;
+    gap: 1rem;
+    padding: 2rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.6rem;
+    &.active {
+        background-color: $accentColor;
+        margin-left: 2rem;
+    }
+    
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+    }
+    
+    &__profile {
+        border-radius: 50%;
+        width: 20%;
+    }
+
+    &__lastmessage {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

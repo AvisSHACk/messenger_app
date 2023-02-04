@@ -1,0 +1,33 @@
+.Message--me {
+    margin-left: auto;
+}
+
+.Message {
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+
+    &--me {
+        flex-direction: row-reverse;
+    }
+
+    &__profile {
+        align-self: self-end;
+    }
+
+    &__text {
+        margin-left: 1rem;
+        background-color: $secondColor;
+        border-radius: 20px;
+        padding: 1.1rem 1.6rem;
+        margin-bottom: 1rem;
+
+        &--me {
+            margin-right: 1rem;
+            border-radius: 20px;
+            padding: 1.1rem 1.6rem;
+            background-color: $accentColor;
+            margin-bottom: 1rem;
+        }
+    }
+}

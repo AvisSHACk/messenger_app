@@ -1,0 +1,64 @@
+.Sidebar {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    // left: -100%;
+    width: 100%;
+    background-color: $firstColor;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+
+    @include from(x-large) {
+        position: static;
+        width: auto;
+    }
+
+    &__title {
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem 1rem;
+    }
+
+    &__openconfig {
+        background: $secondColor;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        color: #fff;
+    }
+
+    &__form {
+        padding: 0 1rem;
+    }
+
+    &__contacts {
+        flex: 1;
+        overflow-y: scroll;
+        position: relative;
+        height: 100%;
+        padding: 1rem;
+
+
+         /*Para firefox*/
+         scrollbar-color: $accentColor transparent;
+         scrollbar-width: thin;
+ 
+         
+ 
+         /*Para webkit*/
+ 
+         &::-webkit-scrollbar-track {
+           background-color: transparent; /*color de la barra de fondo*/
+         }
+ 
+         &::-webkit-scrollbar-thumb {
+           background-color: $accentColor; /*color del manejador*/
+           border-radius: 12px;
+         }
+         
+         &::-webkit-scrollbar {
+           width: 4px; /*ancho del scroll vertical*/
+           height: 4px; /*alto del scroll horizontal*/
+         }
+    }
+}
