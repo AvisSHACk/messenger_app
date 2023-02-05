@@ -1,13 +1,18 @@
-.Message--me {
-    margin-left: auto;
-}
-
-.Message {
+%message {
     max-width: 80%;
     display: flex;
     align-items: center;
+}
 
+[class*="Message--"] {
+    @extend %message;
+}
+
+.Message {
+    @extend %message;
+    
     &--me {
+        margin-left: auto;
         flex-direction: row-reverse;
     }
 

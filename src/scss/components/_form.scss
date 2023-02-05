@@ -1,6 +1,35 @@
-.Form {
+%form {
     margin-top: 1.6rem;
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.6rem; 
+}
+
+%form__input {
+    border-radius: 100px;
+    background: none;
+    padding: 2rem;
+    border: 2px solid $secondColor;
+    width: 100%;
+    color: #fff;
+}
+
+
+[class*=form] {
+    @extend %form;  
+}
+  
+.Form {
+  @extend %form;
+
+    &--chat {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+    }
+
+    &--access {
+        margin: auto;
+    }
 
     &__title {
         text-align: center;
@@ -8,15 +37,11 @@
     }
 
 
-    &__input {
-        border-radius: 100px;
-        background: none;
-        padding: 2rem;
-        border: 2px solid $secondColor;
-        width: 100%;
-        color: #fff;
+    &__input{
+        @extend %form__input;
 
         &--access {
+            @extend %form__input;
             margin-bottom: 1.6rem;
         }
     }
@@ -53,15 +78,4 @@
         text-align: center;
         margin-top: 1rem;
     }
-}
-
-.Form--chat {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-}
-
-.Form--access {
-    margin: auto;
 }

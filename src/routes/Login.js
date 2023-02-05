@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, auth } from "./../firebase/firebaseConfig";
+import { auth, signInWithEmailAndPassword } from "./../firebase/auth";
 
 const Login = () => {
     const [email, changeEmail] = useState('');
@@ -17,7 +17,7 @@ const Login = () => {
         });
     }
     return (
-        <form action="" className="Form Form--access" onSubmit={handleSubmit}>
+        <form action="" className="Form--access" onSubmit={handleSubmit}>
             <h1 className="Form__title">Por favor Inicia sesion</h1>
             <input 
                 className="Form__input Form__input--access" 
