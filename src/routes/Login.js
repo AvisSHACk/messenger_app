@@ -13,8 +13,8 @@ const Login = () => {
                 history("/")
             })
             .catch((error) => {
-                
-        });
+                console.log(error);
+            });
     }
     return (
         <form action="" className="Form--access" onSubmit={handleSubmit}>

@@ -1,5 +1,5 @@
 import { auth, createUserWithEmailAndPassword } from "./auth";
-import {db, doc, setDoc, getDoc } from "./firestore";
+import {db, doc, setDoc, getDoc, onSnapshot, collection } from "./firestore";
 import { storage, getDownloadURL, ref } from "./storage";
 
 const createUser = async (email, password) => {
@@ -36,4 +36,14 @@ const getUrlProfile = async (routePhoto) => {
     return urlPhoto;
 }
 
-export {createUser, getUrlProfile, getUserLogged};
+const getChats = (setChats) => {
+    const onSuscribe = onSnapshot(collection(db, 'chats'), ( snapashot ) => {
+        setChats(snapashot.docs.map((chat) => {
+            return {...chat.data(), id: chat};
+        }));
+    })
+
+    return onSuscribe;
+}
+
+export {createUser, getUrlProfile, getUserLogged, getChats};

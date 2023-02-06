@@ -1,21 +1,18 @@
 import Contact from "./Contact.js";
 import Input from "./elements/Input.js";
-import { BsFillGearFill } from 'react-icons/bs';
+// import { BsFillGearFill } from 'react-icons/bs';
 
-const Sidebar = ({navbarisActive, changeNavbarisActive}) => {
+const Sidebar = ({chatCurrent, navbarisActive, changeNavbarisActive, sidebarActive, changeSidebarActive, chats, changeChatCurrent}) => {
     return ( 
-        <aside className="Sidebar">
-            <h3 className="Sidebar__title">Chats <button className="Sidebar__openconfig" onClick={() => changeNavbarisActive(!navbarisActive)}><BsFillGearFill/></button></h3>
+        <aside className={sidebarActive ? 'Sidebar active' : 'Sidebar'}>
+            <h3 className="Sidebar__title">Chats <button className="Sidebar__openconfig" onClick={() => changeNavbarisActive(!navbarisActive)}>C</button></h3>
             <form className="Sidebar__form Form" action="">
                 <Input classname={"Form__input"} placeholder="Search..."/>
             </form>
-
             <div className="Sidebar__contacts">
-                <Contact />
-                <Contact />
-                <Contact active/>
-                <Contact />
-                <Contact />
+                { chats.map((chat) => {
+                    return <Contact chat={chat} active={chat.id === chatCurrent?.id} changeChatCurrent={changeChatCurrent} changeSidebarActive={changeSidebarActive}/>
+                })}
             </div>
         </aside>
      );

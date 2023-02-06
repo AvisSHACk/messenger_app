@@ -8,10 +8,15 @@
     height: 100vh;
     overflow: hidden;
     z-index: 1;
+    transition: left .3s;
 
     @include from(x-large) {
         position: static;
         width: auto;
+    }
+
+    &.active {
+      left: 0;
     }
 
     &__title {
@@ -21,10 +26,10 @@
     }
 
     &__openconfig {
-        background: $secondColor;
-        border: 1px solid #fff;
+        background: none;
         border-radius: 50%;
         color: #fff;
+        font-size: 2rem;
     }
 
     &__form {

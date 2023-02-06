@@ -4,12 +4,18 @@ import Navbar from "./../components/Navbar";
 import Sidebar from "./../components/Sidebar";
 import { getUrlProfile } from "../firebase/firebaseFunctions";
 import useGetUserLogged from "../hooks/useGetUserLogged";
+import useGetChats from "../hooks/useGetChats";
 
 const Layout = () => {
     const [navbarisActive, changeNavbarisActive] = useState(false); 
+    const [sidebarActive, changeSidebarActive] = useState(true);
     const [photoProfile, changePhotoProfile] = useState({});
-    const user = useGetUserLogged();
+    const [chatCurrent, changeChatCurrent] = useState();
 
+    const user = useGetUserLogged();
+    const chats = useGetChats();
+
+    
     useEffect(() => {
         const execute = async () => {
             if(user) {
@@ -23,9 +29,22 @@ const Layout = () => {
 
     return(
         <>
-            <Navbar navbarisActive={navbarisActive} photoProfile={photoProfile} changePhotoProfile={changePhotoProfile}/>
-            <Sidebar navbarisActive={navbarisActive} changeNavbarisActive={changeNavbarisActive}/>
-            <Chat />
+            <Navbar 
+                navbarisActive={navbarisActive} 
+                photoProfile={photoProfile} 
+                changePhotoProfile={changePhotoProfile}
+            />
+            
+            <Sidebar 
+                chatCurrent={chatCurrent}
+                navbarisActive={navbarisActive}
+                changeNavbarisActive={changeNavbarisActive}
+                sidebarActive={sidebarActive}
+                changeSidebarActive={changeSidebarActive}
+                chats={chats}
+                changeChatCurrent={changeChatCurrent}
+            />
+            <Chat changeSidebarActive={changeSidebarActive} chatCurrent={chatCurrent}/>
         </>
     )
 }

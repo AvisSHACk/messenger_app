@@ -6,8 +6,9 @@
     height: 100vh;
     background-color: $secondColor;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     padding: $padding;
     z-index: 2;
     width: 50%;
@@ -25,5 +26,6 @@
     &__profile {
         width: auto;
         border-radius: 50%;
+        margin-bottom: 2rem;
     }
 }
