@@ -1,14 +1,18 @@
 import { auth, createUserWithEmailAndPassword } from "./auth";
-import {db, doc, setDoc, getDoc, onSnapshot, collection } from "./firestore";
+import {db, doc, setDoc, getDoc, onSnapshot, collection,
+    query, 
+    where,
+    getDocs,
+    addDoc } from "./firestore";
 import { storage, getDownloadURL, ref } from "./storage";
 
-const createUser = async (email, password) => {
+const createUser = async (name, email, password) => {
     const user = await createUserWithEmailAndPassword(auth, email, password);
     
     await setDoc(doc(db, `users/${user.user.uid}`), {
-        name: "Ada",
-        email: "Lovelace",
-        photo: 'guest.png'
+        name: name,
+        email: email,
+        photo: await getUrlProfile('guest.png')
     });
     
 }
@@ -39,11 +43,35 @@ const getUrlProfile = async (routePhoto) => {
 const getChats = (setChats) => {
     const onSuscribe = onSnapshot(collection(db, 'chats'), ( snapashot ) => {
         setChats(snapashot.docs.map((chat) => {
-            return {...chat.data(), id: chat};
+            return {...chat.data(), id: chat.id};
         }));
     })
 
     return onSuscribe;
 }
 
-export {createUser, getUrlProfile, getUserLogged, getChats};
+const getUser = async (email) => {
+    // let user = "";
+    const q = query(collection(db, `users`),  where("email", "==", `${email}`));
+    const userCollection = await getDocs(q);
+    // userCollection.forEach((doc) => {
+    //     user = doc.data();
+    // });
+
+    // return user;
+    return userCollection.docs.map((user) => {
+        return user.data();
+    });
+}
+
+const addChat = async (usersNames, userEmails, usersPhoto) => {
+    await addDoc(collection(db, `chats`), {
+
+        names: usersNames,
+        emails: userEmails,
+        photos: usersPhoto
+
+    });
+}
+
+export {createUser, getUrlProfile, getUserLogged, getChats, getUser, addChat};

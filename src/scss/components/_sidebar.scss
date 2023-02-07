@@ -9,6 +9,7 @@
     overflow: hidden;
     z-index: 1;
     transition: left .3s;
+    border-right: 2px solid #32354b;
 
     @include from(x-large) {
         position: static;
@@ -22,14 +23,8 @@
     &__title {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 2rem 1rem;
-    }
-
-    &__openconfig {
-        background: none;
-        border-radius: 50%;
-        color: #fff;
-        font-size: 2rem;
     }
 
     &__form {
@@ -66,4 +61,7 @@
            height: 4px; /*alto del scroll horizontal*/
          }
     }
+
+    
+  
 }

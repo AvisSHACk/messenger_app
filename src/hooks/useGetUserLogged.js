@@ -7,8 +7,11 @@ const useGetUserLogged = () => {
     const {user} = useAuth();
 
     useEffect(() => {
-        
-            getUserLogged(user, changeUserCurrent);
+        const execute = async () => {
+            await getUserLogged(user, changeUserCurrent);
+        }
+
+        execute()
     }, [user])
 
     return userCurrent;

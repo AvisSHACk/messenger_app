@@ -5,6 +5,7 @@ const useGetChats = () => {
     const [chats, setChats] = useState([]);
     useEffect(() => {
         getChats(setChats);
+
     }, [])
 
     return chats;

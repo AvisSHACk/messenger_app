@@ -18,6 +18,7 @@
     &__name {
         display: flex;
         align-items: center;
+        margin-left: 1rem;
         &::before {
             content: '';
             width: 10px;

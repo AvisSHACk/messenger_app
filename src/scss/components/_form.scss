@@ -62,8 +62,12 @@
 
     &__buttonsend {
         margin-left: 2rem;
-        padding: 1.6rem;
-        font-size: 2rem;
+
+        svg {
+            position: relative;
+            top: 5px;
+            right: 1px;
+        }
     }
 
     &__redirect {

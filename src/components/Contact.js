@@ -1,14 +1,16 @@
-const Contact = ({chat, active, changeSidebarActive, changeChatCurrent}) => {
+import filterNameContact from "../utils/filterNameContact";
 
+const Contact = ({userLogged, chat, active, changeSidebarActive, changeChatCurrent}) => {
     const handleClick = (chat) => {
         changeChatCurrent(chat);
-        changeSidebarActive(false)
+        changeSidebarActive(false);
     }
+    
     return ( 
         <div className={active ? 'Contact active' : 'Contact' } onClick={() => handleClick(chat)}>
-            <img className="Contact__profile" src="https://picsum.photos/50" alt="" />
+            <img className="Contact__profile" src={chat.photos} alt="" />
             <div className="Contact__info">
-                <h4 className="Contact__name">{chat.emails[0]}</h4>
+                <h4 className="Contact__name">{filterNameContact(chat.names, userLogged.name)}</h4>
                 <p className="Contact__lastmessage">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </div>
         </div>

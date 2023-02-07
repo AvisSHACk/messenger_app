@@ -3,19 +3,28 @@ import { Link, useNavigate } from "react-router-dom";
 import {createUser} from "../firebase/firebaseFunctions";
 
 const Register = () => {
+    const [name, changeName] = useState('');
     const [email, changeEmail] = useState('');
     const [password, changePassword] = useState('');
     const history = useNavigate();
 
     const handleSingup = async (e) => {
         e.preventDefault(); 
-        await createUser(email, password);
+        await createUser(name, email, password);
         history("/");
     }
 
     return ( 
         <form action="" className="Form--access" onSubmit={handleSingup}>
             <h1 className="Form__title">Por favor Registrate</h1>
+            <input 
+                className='Form__input--access'
+                type="text"
+                value={name}
+                onChange={(e) => changeName(e.target.value)}
+                placeholder="Nombre" 
+            />
+
             <input 
                 className='Form__input--access'
                 type="email"

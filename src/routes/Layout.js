@@ -14,8 +14,6 @@ const Layout = () => {
 
     const user = useGetUserLogged();
     const chats = useGetChats();
-
-    
     useEffect(() => {
         const execute = async () => {
             if(user) {
@@ -33,6 +31,7 @@ const Layout = () => {
                 navbarisActive={navbarisActive} 
                 photoProfile={photoProfile} 
                 changePhotoProfile={changePhotoProfile}
+                userLogged={user}
             />
             
             <Sidebar 
@@ -43,6 +42,7 @@ const Layout = () => {
                 changeSidebarActive={changeSidebarActive}
                 chats={chats}
                 changeChatCurrent={changeChatCurrent}
+                userLogged={user}
             />
             <Chat changeSidebarActive={changeSidebarActive} chatCurrent={chatCurrent}/>
         </>
