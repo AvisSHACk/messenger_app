@@ -3,7 +3,8 @@
     position: absolute;
     top: 0;
     transform: translateX(-100%);
-    height: 100vh;
+    // height: 100vh;
+    height: 100%;
     background-color: $secondColor;
     display: flex;
     flex-direction: column;

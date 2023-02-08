@@ -5,7 +5,8 @@
     left: -100%;
     width: 100%;
     background-color: $firstColor;
-    height: 100vh;
+    // height: 100vh;
+    height: 100%;
     overflow: hidden;
     z-index: 1;
     transition: left .3s;
@@ -13,7 +14,7 @@
 
     @include from(x-large) {
         position: static;
-        width: auto;
+        width: 40%;
     }
 
     &.active {

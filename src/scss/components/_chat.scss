@@ -3,10 +3,6 @@
     flex-direction: column;
     width: 100%;
 
-    @include from(x-large) {
-        width: auto;// flex: ;
-    }
-
     &__header {
         padding: 2rem;
         border-bottom: 2px solid $secondColor;

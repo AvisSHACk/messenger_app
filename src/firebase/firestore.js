@@ -1,4 +1,15 @@
-import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { 
+    getFirestore, 
+    doc, setDoc, 
+    getDoc, 
+    onSnapshot, 
+    collection, 
+    query, 
+    where, 
+    getDocs, 
+    addDoc, 
+    serverTimestamp
+} from "firebase/firestore";
 import { app } from "./firebaseConfig";
 
 const db = getFirestore(app);
@@ -13,5 +24,6 @@ export {
     query, 
     where,
     getDocs,
-    addDoc
+    addDoc,
+    serverTimestamp
 }

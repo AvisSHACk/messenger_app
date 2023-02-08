@@ -7,13 +7,14 @@ import useGetUserLogged from "../hooks/useGetUserLogged";
 import useGetChats from "../hooks/useGetChats";
 
 const Layout = () => {
-    const [navbarisActive, changeNavbarisActive] = useState(false); 
+    const [navbarisActive, changeNavbarisActive] = useState(false);
     const [sidebarActive, changeSidebarActive] = useState(true);
     const [photoProfile, changePhotoProfile] = useState({});
     const [chatCurrent, changeChatCurrent] = useState();
 
     const user = useGetUserLogged();
     const chats = useGetChats();
+    
     useEffect(() => {
         const execute = async () => {
             if(user) {
@@ -44,7 +45,7 @@ const Layout = () => {
                 changeChatCurrent={changeChatCurrent}
                 userLogged={user}
             />
-            <Chat changeSidebarActive={changeSidebarActive} chatCurrent={chatCurrent}/>
+            <Chat changeSidebarActive={changeSidebarActive} chatCurrent={chatCurrent} userLogged={user}/>
         </>
     )
 }

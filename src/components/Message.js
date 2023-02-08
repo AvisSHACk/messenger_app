@@ -1,8 +1,8 @@
-const Message = ({me}) => {
+const Message = ({message, userLogged}) => {
     return ( 
-        <div className={me ? 'Message--me': 'Message'}>
-            <img src="https://picsum.photos/50" alt="" className="Message__profile Profile" />
-            <p className={me ? 'Message__text--me': 'Message__text'}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae molestiae blanditiis explicabo illo saepe, voluptatibus totam veniam optio veritatis accusantium, mollitia minima eveniet laboriosam. Sequi architecto ad itaque autem maiores.</p>
+        <div key={Math.random()} className={message.email === userLogged.email ? 'Message' : 'Message--me'}>
+            <img src={message.photos} alt="" className="Message__profile Profile" />
+            <p className={message.email === userLogged.email ? 'Message__text': 'Message__text--me'}>{message.message}</p>
         </div>
      );
 }

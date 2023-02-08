@@ -1,9 +1,11 @@
+import { orderBy } from "firebase/firestore";
 import { auth, createUserWithEmailAndPassword } from "./auth";
 import {db, doc, setDoc, getDoc, onSnapshot, collection,
     query, 
     where,
     getDocs,
-    addDoc } from "./firestore";
+    addDoc,
+    serverTimestamp } from "./firestore";
 import { storage, getDownloadURL, ref } from "./storage";
 
 const createUser = async (name, email, password) => {
@@ -74,4 +76,38 @@ const addChat = async (usersNames, userEmails, usersPhoto) => {
     });
 }
 
-export {createUser, getUrlProfile, getUserLogged, getChats, getUser, addChat};
+const addMessage = async (id, message, email, photo) => {
+    await addDoc(collection(db, `chats/${id}/mensajes`), {
+
+        name: 'nombre',
+        email: email,
+        message: message,
+        photos: photo,
+        timeStamp: serverTimestamp()
+
+    });
+}
+
+const getMessages = (id, setMessages) => {
+        
+    const onSuscribe = onSnapshot(query(collection(db, `chats/${id}/mensajes`), orderBy("timeStamp")), 
+    (snapshot) => {
+        setMessages(snapshot.docs.map((chat) => {
+            return {...chat.data(), id: chat.id};
+        }));
+    });
+
+
+    return onSuscribe;
+}
+
+export {
+    createUser, 
+    getUrlProfile, 
+    getUserLogged, 
+    getChats, 
+    getUser, 
+    addChat,
+    addMessage,
+    getMessages
+};

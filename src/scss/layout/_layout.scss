@@ -1,5 +1,10 @@
+
+#root, .App {
+    height: 100%;
+}
 .App {
-    height: 100vh;
+    // height: 100vh;
+    // min-height: -webkit-fill-available;
     display: flex;
 }
 
