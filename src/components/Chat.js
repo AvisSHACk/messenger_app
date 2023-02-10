@@ -1,15 +1,33 @@
 import Message from "./Message";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import filterNameContact from "../utils/filterNameContact";
-import { useRef} from "react";
+import { useEffect, useRef} from "react";
 import FormSend from "./FormSend";
 import useGetMessages from "../hooks/useGetMessages";
+import useGetChatCurrent from "../hooks/useGetChatCurrent";
 
-const Chat = ({changeSidebarActive, chatCurrent, userLogged}) => {
+const Chat = ({changeSidebarActive, userLogged}) => {
 
-    const messages = useGetMessages(chatCurrent?.id);
+    const {chatCurrent} = useGetChatCurrent();
+    const [messages, loading] = useGetMessages(chatCurrent?.id);
     const anchor = useRef();
-    
+
+    useEffect(() => {
+        if(!loading) {
+            anchor.current.scrollIntoView()
+        }
+    }, [loading])
+
+
+    if(!chatCurrent){
+        return (
+            <main className="Chat">
+                <p>Hola</p>
+            </main>
+        )
+    }
+
+
     return ( 
         <main className="Chat">
             <header className="Chat__header">
@@ -24,7 +42,11 @@ const Chat = ({changeSidebarActive, chatCurrent, userLogged}) => {
                 </h2>
             </header>
             <div className="Chat__messages">
-                {messages && messages.map((message) => <Message message={message} userLogged={userLogged}/>)}
+                {!loading ?
+                    messages.map((message) => <Message message={message} userLogged={userLogged}/>)
+                :
+                    <div className="loader"></div>
+                }
                 
                 <div ref={anchor}></div>
             </div>

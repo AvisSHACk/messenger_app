@@ -2,7 +2,7 @@ import { addChat, getUser } from "../firebase/firebaseFunctions";
 import Logout from "./elements/Logout";
 import { AiOutlinePlus } from 'react-icons/ai';
 
-const NavBar = ({navbarisActive, photoProfile, userLogged}) => {
+const NavBar = ({navbarisActive, userLogged}) => {
 
     const handleAdd = async () => {
         let newEmail = prompt('Escribe el correo');
@@ -12,7 +12,7 @@ const NavBar = ({navbarisActive, photoProfile, userLogged}) => {
     return(
         <nav className={navbarisActive ? 'Navbar active' : 'Navbar'}>
             <span className="Button--accent" onClick={() => handleAdd()}><AiOutlinePlus/></span>
-            <img className="Navbar__profile" src={photoProfile} alt="" />
+            <img className="Navbar__profile" src={userLogged && userLogged.photo} alt="" />
             <Logout />
         </nav>
     )

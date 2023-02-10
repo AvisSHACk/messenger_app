@@ -8,9 +8,10 @@ const FormSend = ({chatCurrent, userLogged, anchor}) => {
     const onSend = (e) => {
         e.preventDefault();
         const email = filterNameContact(chatCurrent.emails, userLogged.email)
-        addMessage(chatCurrent.id, message, email, chatCurrent.photos);
         setMessage('');
+        addMessage(chatCurrent.id, message, email, chatCurrent.photos);
     }
+
     useEffect(() => {
         anchor.current.scrollIntoView({behavior: "smooth"})
     })

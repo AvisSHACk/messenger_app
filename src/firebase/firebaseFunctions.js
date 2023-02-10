@@ -42,11 +42,12 @@ const getUrlProfile = async (routePhoto) => {
     return urlPhoto;
 }
 
-const getChats = (setChats) => {
+const getChats = (setChats, setLoading) => {
     const onSuscribe = onSnapshot(collection(db, 'chats'), ( snapashot ) => {
         setChats(snapashot.docs.map((chat) => {
             return {...chat.data(), id: chat.id};
         }));
+        setLoading(false);
     })
 
     return onSuscribe;
@@ -88,13 +89,14 @@ const addMessage = async (id, message, email, photo) => {
     });
 }
 
-const getMessages = (id, setMessages) => {
-        
+const getMessages = (id, setMessages, setLoading) => {
+    setLoading(true);
     const onSuscribe = onSnapshot(query(collection(db, `chats/${id}/mensajes`), orderBy("timeStamp")), 
     (snapshot) => {
         setMessages(snapshot.docs.map((chat) => {
             return {...chat.data(), id: chat.id};
         }));
+        setLoading(false);
     });
 
 

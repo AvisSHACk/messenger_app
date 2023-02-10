@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
-import { getChats } from "../firebase/firebaseFunctions";
+import { useContext } from "react";
+import { ChatsContext } from "../context/chatsContext";
 
 const useGetChats = () => {
-    const [chats, setChats] = useState([]);
-    useEffect(() => {
-        getChats(setChats);
-
-    }, [])
-
-    return chats;
+    return useContext(ChatsContext);
 }
  
 export default useGetChats;

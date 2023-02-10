@@ -1,6 +1,9 @@
+import useGetChatCurrent from "../hooks/useGetChatCurrent";
 import filterNameContact from "../utils/filterNameContact";
 
-const Contact = ({userLogged, chat, active, changeSidebarActive, changeChatCurrent}) => {
+const Contact = ({userLogged, chat, active, changeSidebarActive}) => {
+    const {changeChatCurrent} = useGetChatCurrent();
+    
     const handleClick = (chat) => {
         changeChatCurrent(chat);
         changeSidebarActive(false);

@@ -3,14 +3,15 @@ import { getMessages } from "../firebase/firebaseFunctions";
 
 const useGetMessages = (id) => {
     const [messages, setMessages] = useState();
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         if(id) {
             console.log(id);
-            getMessages(id, setMessages);
+            getMessages(id, setMessages, setLoading);
         }
     }, [id])
 
-     return messages;
+     return [messages, loading];
 }
  
 export default useGetMessages;
