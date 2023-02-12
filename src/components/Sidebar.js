@@ -1,52 +1,21 @@
-import Contact from "./Contact.js";
-import Input from "./elements/Input.js";
-import filterChatsUser from "../utils/filterChatsUser.js";
-import { BsFillGearFill } from 'react-icons/bs';
-import useGetChats from "../hooks/useGetChats.js";
-import useGetChatCurrent from "../hooks/useGetChatCurrent.js";
+import SideContact from "./SideContact.js";
 import useGetUserLogged from "../hooks/useGetUserLogged";
+import SideProfile from "./SideProfile.js";
 
-const Sidebar = ({navbarisActive, changeNavbarisActive, sidebarActive, changeSidebarActive}) => {
 
-
-    
-    const {chats} = useGetChats();
-    const {chatCurrent} = useGetChatCurrent();
+const Sidebar = ({navbarisActive, changeNavbarisActive, sidebarActive, changeSidebarActive, sideProfileActive, changeSideProfileActive}) => {
     const userCurrent = useGetUserLogged();
-
     return ( 
         <aside className={sidebarActive ? 'Sidebar active' : 'Sidebar'}>
-            <h3 className="Sidebar__title">
-                Chats 
-                <button className="Button--noBackground" onClick={() => changeNavbarisActive(!navbarisActive)}><BsFillGearFill /></button>
-            </h3>
-            <form className="Sidebar__form Form" action="">
-                <Input classname={"Form__input"} placeholder="Search..."/>
-            </form>
-            <div className="Sidebar__contacts">
-                {!userCurrent &&
-                    <h3 className="Sidebar__title">
-                        <div className="loader"></div>
-                    </h3>
-                }
+            <SideContact 
+                userCurrent={userCurrent}
+                navbarisActive={navbarisActive}
+                changeNavbarisActive={changeNavbarisActive}
+                changeSidebarActive={changeSidebarActive}
+                sidebarActive={sidebarActive}
+            />
 
-                {userCurrent && filterChatsUser(chats, userCurrent).length === 0 &&
-                    <h3 className="Sidebar__title">
-                        Aun no tienes contactos agregados, por favor agrega uno desde el boton con el signo mas =)
-                    </h3>
-                }
-
-                {filterChatsUser(chats, userCurrent).map((chat) => {
-                                return <Contact 
-                                            userLogged={userCurrent} 
-                                            chat={chat} 
-                                            active={chat.id === chatCurrent?.id} 
-                                            changeSidebarActive={changeSidebarActive}
-                                            key={chat.id}
-                                        />
-                                })
-                }
-            </div>
+            <SideProfile active={sideProfileActive} changeSideProfileActive={changeSideProfileActive}/>
         </aside>
      );
 }

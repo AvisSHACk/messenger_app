@@ -14,6 +14,7 @@ import {UserCurrentProvider} from "../context/userCurrentContext";
 const Layout = () => {
     const [navbarisActive, changeNavbarisActive] = useState(false);
     const [sidebarActive, changeSidebarActive] = useState(true);
+    const [sideProfileActive, changeSideProfileActive] = useState(false);
     // const userCurrent = 
     // const usuario = useAuth();
 
@@ -41,8 +42,6 @@ const Layout = () => {
         
         
     //     }, []);
-
-
     return(
         <ChatsProvider>
             {/* <ToastContainer /> */}
@@ -51,6 +50,7 @@ const Layout = () => {
                     <Navbar 
                         navbarisActive={navbarisActive}
                         changeNavbarisActive={changeNavbarisActive}
+                        changeSideProfileActive={changeSideProfileActive}
                     />
                     
                     <Sidebar 
@@ -58,6 +58,8 @@ const Layout = () => {
                         changeNavbarisActive={changeNavbarisActive}
                         sidebarActive={sidebarActive}
                         changeSidebarActive={changeSidebarActive}
+                        sideProfileActive={sideProfileActive}
+                        changeSideProfileActive={changeSideProfileActive}
                     />
                     <Chat 
                         changeSidebarActive={changeSidebarActive}

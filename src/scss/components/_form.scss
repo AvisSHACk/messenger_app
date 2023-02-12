@@ -55,9 +55,17 @@
         position: relative;
     }
 
-    &__buttonvoice {
+    &__face {
         position: absolute;
         right: 2rem;
+        font-size: 3rem;
+
+        & svg {
+            position: relative;
+            top: 4px;
+        }
+
+        cursor: pointer;
     }
 
     &__buttonsend {

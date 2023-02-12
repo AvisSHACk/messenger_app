@@ -7,8 +7,7 @@ const userCurrentContext = createContext();
 const UserCurrentProvider = ({children}) => {
     const [userCurrent, changeUserCurrent] = useState();
     const {user} = useAuth();
-
-    console.log(user);
+    
     useEffect(() => {
         const execute = async () => {
             await getUserLogged(user, changeUserCurrent);

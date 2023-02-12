@@ -3,7 +3,7 @@ import Logout from "./elements/Logout";
 import { AiOutlinePlus } from 'react-icons/ai';
 import useGetUserLogged from "../hooks/useGetUserLogged";
 
-const NavBar = ({navbarisActive, changeNavbarisActive}) => {
+const NavBar = ({navbarisActive, changeNavbarisActive, changeSideProfileActive}) => {
 
     const userCurrent = useGetUserLogged();
 
@@ -25,10 +25,21 @@ const NavBar = ({navbarisActive, changeNavbarisActive}) => {
         const [newChat] = await getUser(newEmail);
         addChat([newChat.name, userCurrent.name], [userCurrent.email, newChat.email,], newChat.photo);
     }
+    
+    const handleImage = () => {
+        changeSideProfileActive(true);
+        changeNavbarisActive(false);
+    }
+    
     return(
         <nav className={navbarisActive ? 'Navbar active' : 'Navbar'}>
             <span className="Button--accent" onClick={() => handleAdd()}><AiOutlinePlus/></span>
-            <img className="Navbar__profile" src={userCurrent && userCurrent.photo} alt="" />
+            <img 
+                className="Navbar__profile" 
+                src={userCurrent && userCurrent.photo} 
+                onClick={handleImage}
+                alt=""
+            />
             <Logout />
         </nav>
     )

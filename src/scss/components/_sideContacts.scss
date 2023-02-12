@@ -1,0 +1,59 @@
+.SideContact {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: $firstColor;
+    // height: 100vh;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    transition: left .3s;
+    border-right: 2px solid #32354b;
+
+    @include from(x-large) {
+        position: static;
+    }
+
+    &__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 1rem;
+    }
+
+    &__form {
+        padding: 0 1rem;
+    }
+
+    &__contacts {
+        flex: 1;
+        overflow-y: scroll;
+        position: relative;
+        height: 100%;
+        padding: 1rem;
+
+
+         /*Para firefox*/
+         scrollbar-color: $accentColor transparent;
+         scrollbar-width: thin;
+ 
+         
+ 
+         /*Para webkit*/
+ 
+         &::-webkit-scrollbar-track {
+           background-color: transparent; /*color de la barra de fondo*/
+         }
+ 
+         &::-webkit-scrollbar-thumb {
+           background-color: $accentColor; /*color del manejador*/
+           border-radius: 12px;
+         }
+         
+         &::-webkit-scrollbar {
+           width: 4px; /*ancho del scroll vertical*/
+           height: 4px; /*alto del scroll horizontal*/
+         }
+    }
+
+}
