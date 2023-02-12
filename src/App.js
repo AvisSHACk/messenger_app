@@ -14,14 +14,16 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
-            <Route path={"/login"} element={<Login/>}/>
-            <Route path={"/register"} element={<Register/>}/>
-            
-            <Route element={<RutasProtegidas/>}>
-              <Route path={"/"} element={<Layout/>}/>
-            </Route>
-          </Routes>
+          {/* <UserCurrentProvider> */}
+            <Routes>
+              <Route path={"/login"} element={<Login/>}/>
+              <Route path={"/register"} element={<Register/>}/>
+              
+              <Route element={<RutasProtegidas/>}>
+                <Route path={"/"} element={<Layout/>}/>
+              </Route>
+            </Routes>
+          {/* </UserCurrentProvider> */}
         </AuthProvider>
       </BrowserRouter>
     </div>

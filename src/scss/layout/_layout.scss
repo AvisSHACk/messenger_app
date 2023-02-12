@@ -15,7 +15,8 @@
     cursor: pointer;
     padding: 0.8rem 1rem;
     font-size: 2.6rem;  
-
+    display: block;
+    
     svg {
         position: relative;
         top: 4px;
@@ -36,6 +37,10 @@
 .Button--purple {
     background-color: $accentColor;
     color: #fff;
+    transition: background-color .3s;
+    &:disabled {
+        background-color: lighten($accentColor, 10%);
+    }
 }
 
 .Button--access {

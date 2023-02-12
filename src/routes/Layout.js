@@ -2,9 +2,9 @@ import { useState } from "react";
 import Chat from "./../components/Chat";
 import Navbar from "./../components/Navbar";
 import Sidebar from "./../components/Sidebar";
-import useGetUserLogged from "../hooks/useGetUserLogged";
 import { ChatsProvider } from "../context/chatsContext";
 import {ChatCurrentProvider} from "../context/chatCurrentContext";
+import {UserCurrentProvider} from "../context/userCurrentContext";
 // import { useAuth } from "../context/authContext";
 
 // import {getToken, onMessage} from "firebase/messaging";
@@ -14,9 +14,7 @@ import {ChatCurrentProvider} from "../context/chatCurrentContext";
 const Layout = () => {
     const [navbarisActive, changeNavbarisActive] = useState(false);
     const [sidebarActive, changeSidebarActive] = useState(true);
-
-    const user = useGetUserLogged();
-
+    // const userCurrent = 
     // const usuario = useAuth();
 
     // console.log(usuario);
@@ -48,24 +46,24 @@ const Layout = () => {
     return(
         <ChatsProvider>
             {/* <ToastContainer /> */}
-            <Navbar 
-                navbarisActive={navbarisActive}
-                userLogged={user}
-            />
-                
-            <ChatCurrentProvider>
-                <Sidebar 
-                    navbarisActive={navbarisActive}
-                    changeNavbarisActive={changeNavbarisActive}
-                    sidebarActive={sidebarActive}
-                    changeSidebarActive={changeSidebarActive}
-                    userLogged={user}
-                />
-                <Chat 
-                    changeSidebarActive={changeSidebarActive} 
-                    userLogged={user}
-                />
-            </ChatCurrentProvider>
+            <UserCurrentProvider>
+                <ChatCurrentProvider>
+                    <Navbar 
+                        navbarisActive={navbarisActive}
+                        changeNavbarisActive={changeNavbarisActive}
+                    />
+                    
+                    <Sidebar 
+                        navbarisActive={navbarisActive}
+                        changeNavbarisActive={changeNavbarisActive}
+                        sidebarActive={sidebarActive}
+                        changeSidebarActive={changeSidebarActive}
+                    />
+                    <Chat 
+                        changeSidebarActive={changeSidebarActive}
+                    />
+                </ChatCurrentProvider>
+            </UserCurrentProvider>
         </ChatsProvider>
     )
 }

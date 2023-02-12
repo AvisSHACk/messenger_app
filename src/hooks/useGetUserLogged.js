@@ -1,20 +1,8 @@
-import { useEffect, useState } from "react"
-import { useAuth } from "../context/authContext";
-import { getUserLogged } from "../firebase/firebaseFunctions";
+import { useContext } from "react"
+import { userCurrentContext } from "../context/userCurrentContext";
 
 const useGetUserLogged = () => {
-    const [userCurrent, changeUserCurrent] = useState();
-    const {user} = useAuth();
-
-    useEffect(() => {
-        const execute = async () => {
-            await getUserLogged(user, changeUserCurrent);
-        }
-
-        execute()
-    }, [user])
-
-    return userCurrent;
+    return useContext(userCurrentContext);
 }
 
 export default useGetUserLogged;
