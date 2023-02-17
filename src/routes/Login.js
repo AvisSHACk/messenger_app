@@ -5,8 +5,11 @@ import { auth, signInWithEmailAndPassword } from "./../firebase/auth";
 const Login = () => {
     const [email, changeEmail] = useState('');
     const [password, changePassword] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const history = useNavigate();
     const handleSubmit = (e) => {
+        setLoading(true);
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -14,6 +17,7 @@ const Login = () => {
             })
             .catch((error) => {
                 console.log(error);
+                setLoading(false);
             });
     }
     return (
@@ -33,7 +37,11 @@ const Login = () => {
                 onChange={(e) => changePassword(e.target.value)}
                 placeholder="Contraseña" 
             />
-            <button className="Button--access">Ingresa</button>
+
+            <button className="Button--access">
+                {loading ? <div className="loader"></div> : 'Iniciar sesion'}
+                
+            </button>
             <p className="Form__message">¿Aun no tienes una cuenta? <Link to={"/register"} className="Form__redirect">Registrate</Link></p>
         </form>
      );

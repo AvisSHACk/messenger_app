@@ -1,6 +1,6 @@
 import { orderBy } from "firebase/firestore";
 import { auth, createUserWithEmailAndPassword } from "./auth";
-import {db, doc, setDoc, getDoc, onSnapshot, collection,
+import {db, doc, setDoc, onSnapshot, collection,
     query, 
     where,
     getDocs,
@@ -21,9 +21,11 @@ const createUser = async (name, email, password) => {
 
 const getUserLogged = async (user, changeUserCurrent) => {
 
-    const userRef = doc(db, `users/${user.uid}`);
-    const userCollection = await getDoc(userRef);
-    changeUserCurrent(userCollection.data());
+    const onSuscribe = onSnapshot(doc(db, `users/${user.uid}`), ( snapashot ) => {
+        changeUserCurrent(snapashot.data());
+    })
+
+    return onSuscribe;
 
 }
 

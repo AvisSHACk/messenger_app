@@ -8,7 +8,8 @@ import {
     where, 
     getDocs, 
     addDoc, 
-    serverTimestamp
+    serverTimestamp,
+    updateDoc
 } from "firebase/firestore";
 import { app } from "./firebaseConfig";
 
@@ -25,5 +26,6 @@ export {
     where,
     getDocs,
     addDoc,
-    serverTimestamp
+    serverTimestamp,
+    updateDoc
 }
