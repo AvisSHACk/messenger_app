@@ -25,7 +25,9 @@ const Chat = ({changeSidebarActive}) => {
     if(!chatCurrent){
         return (
             <main className="Chat">
-                <p>Bienvenido a mi app xd, esto aun esta en desarrollo, PD: se vienen cositas</p>
+                <div className="Chat__welcome">
+                    <p>Bienvenido a mi app xd, esto aun esta en desarrollo, PD: se vienen cositas</p>
+                </div>
             </main>
         )
     }

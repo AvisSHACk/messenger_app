@@ -63,4 +63,11 @@
           height: 4px; /*alto del scroll horizontal*/
         }
     }
+
+    &__welcome {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+    }
 }
