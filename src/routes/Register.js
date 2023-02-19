@@ -1,17 +1,32 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Alerta from "../components/elements/Alerta";
 import {createUser} from "../firebase/firebaseFunctions";
+import getMessageErrorAlert from "../utils/getMessageErrorAlert";
 
 const Register = () => {
     const [name, changeName] = useState('');
     const [email, changeEmail] = useState('');
     const [password, changePassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [alerta, setAlerta] = useState({});
+    const [estadoAlerta, setEstadoAlerta] = useState(false);
     const history = useNavigate();
 
     const handleSingup = async (e) => {
-        e.preventDefault(); 
-        await createUser(name, email, password);
-        history("/");
+        setLoading(true);
+        e.preventDefault();
+        try {
+            await createUser(name, email, password);
+            history("/");
+        } catch (e) {
+            setLoading(false);
+            setEstadoAlerta(true);
+            setAlerta({
+                tipo: "error",
+                mensaje: getMessageErrorAlert(e.code)
+            })
+        }
     }
 
     return ( 
@@ -39,8 +54,17 @@ const Register = () => {
                 onChange={(e) => changePassword(e.target.value)}
                 placeholder="Contraseña" 
             />
-            <button className="Button--access">Ingresa</button>
+            <button className="Button--access">
+                {loading ? <div className="loader"></div> : 'Registrate'}
+                
+            </button>
             <p className="Form__message">¿Ya tienes una cuenta? <Link to={"/login"} className="Form__redirect">Inicia sesion</Link></p>
+            <Alerta 
+                tipo={alerta.tipo}
+                mensaje={alerta.mensaje} 
+                estadoAlerta={estadoAlerta}
+                setEstadoAlerta={setEstadoAlerta}
+            />
         </form>
      );
 }

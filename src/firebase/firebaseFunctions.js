@@ -19,6 +19,7 @@ const createUser = async (name, email, password) => {
     
 }
 
+
 const getUserLogged = async (user, changeUserCurrent) => {
 
     const onSuscribe = onSnapshot(doc(db, `users/${user.uid}`), ( snapashot ) => {

@@ -4,6 +4,7 @@ import filterChatsUser from "../utils/filterChatsUser.js";
 import { BsFillGearFill } from 'react-icons/bs';
 import useGetChats from "../hooks/useGetChats.js";
 import useGetChatCurrent from "../hooks/useGetChatCurrent.js";
+import { AiOutlineClose } from "react-icons/ai";
 const SideContact = ({userCurrent, changeNavbarisActive, changeSidebarActive, navbarisActive}) => {
     const {chats} = useGetChats();
     const {chatCurrent} = useGetChatCurrent();
@@ -12,7 +13,9 @@ const SideContact = ({userCurrent, changeNavbarisActive, changeSidebarActive, na
         <div className="SideContact">
             <h3 className="SideContact__title">
                 Chats 
-                <button className="Button--noBackground" onClick={() => changeNavbarisActive(!navbarisActive)}><BsFillGearFill /></button>
+                <button className="SideContact__engran Button--noBackground" onClick={() => changeNavbarisActive(!navbarisActive)}>
+                    {navbarisActive ?  <AiOutlineClose/> : <BsFillGearFill /> }
+                </button>
             </h3>
             <form className="SideContact__form Form" action="">
                 <Input classname={"Form__input"} placeholder="Search..."/>

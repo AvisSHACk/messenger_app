@@ -7,11 +7,20 @@
     height: 100%;
     overflow: hidden;
     z-index: 1;
-    transition: left .3s;
+    transition: left .2s;
     border-right: 2px solid #32354b;
 
     @include from(x-large) {
         position: static;
+    }
+
+
+    &__engran {
+      display: block;
+
+      @include from(x-large) {
+        display: none;
+      }
     }
 
     &__title {

@@ -29,6 +29,10 @@
         }
     }
 
+    &__arrowLeft {
+      @include from(x-large) { display: none;}
+    }
+
     &__messages {
         flex: 1;
         padding-right: .5rem;

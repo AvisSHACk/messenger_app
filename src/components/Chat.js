@@ -35,7 +35,7 @@ const Chat = ({changeSidebarActive}) => {
         <main className="Chat">
             <header className="Chat__header">
                 <span 
-                    className="Button--noBackground" 
+                    className="Chat__arrowLeft Button--noBackground" 
                     onClick={() => changeSidebarActive(true)}
                 >
                     <AiOutlineArrowLeft/>
