@@ -14,7 +14,7 @@ const createUser = async (name, email, password) => {
     await setDoc(doc(db, `users/${user.user.uid}`), {
         name: name,
         email: email,
-        photo: await getUrlProfile('guest.png')
+        photo: user.user.uid
     });
     
 }

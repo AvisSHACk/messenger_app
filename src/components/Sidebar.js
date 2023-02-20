@@ -4,7 +4,7 @@ import SideProfile from "./SideProfile.js";
 
 
 const Sidebar = ({navbarisActive, changeNavbarisActive, sidebarActive, changeSidebarActive, sideProfileActive, changeSideProfileActive}) => {
-    const userCurrent = useGetUserLogged();
+    const {userCurrent} = useGetUserLogged();
     return ( 
         <aside className={sidebarActive ? 'Sidebar active' : 'Sidebar'}>
             <SideContact 

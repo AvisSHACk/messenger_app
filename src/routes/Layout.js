@@ -15,6 +15,7 @@ const Layout = () => {
     const [navbarisActive, changeNavbarisActive] = useState(false);
     const [sidebarActive, changeSidebarActive] = useState(true);
     const [sideProfileActive, changeSideProfileActive] = useState(false);
+
     // const userCurrent = 
     // const usuario = useAuth();
 

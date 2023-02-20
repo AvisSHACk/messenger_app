@@ -37,7 +37,7 @@ const SideContact = ({userCurrent, changeNavbarisActive, changeSidebarActive, na
                     return <Contact 
                                 userLogged={userCurrent} 
                                 chat={chat} 
-                                active={chat.id === chatCurrent?.id} 
+                                active={chat.id === chatCurrent?.chat.id} 
                                 changeSidebarActive={changeSidebarActive}
                                 key={chat.id}
                             />

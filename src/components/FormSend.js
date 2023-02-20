@@ -24,7 +24,7 @@ const FormSend = ({chatCurrent, userLogged, anchor}) => {
         const email = filterNameContact(chatCurrent.emails, userLogged.email)
         setMessage('');
         changesendDisabled(true);
-        addMessage(chatCurrent.id, message, email, chatCurrent.photos);
+        addMessage(chatCurrent.id, message, email, userLogged.photo);
     }
 
     useEffect(() => {

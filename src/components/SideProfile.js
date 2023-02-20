@@ -6,7 +6,7 @@ import { db, doc, updateDoc } from '../firebase/firestore';
 import { getUrlProfile } from '../firebase/firebaseFunctions';
 import { useRef } from 'react';
 const SideProfile = ({active, changeSideProfileActive}) => {
-    const userCurrent = useGetUserLogged();
+    const {userCurrent, userPhotoProfile, setUserPhotoProfile} = useGetUserLogged();
     const {user} = useAuth();
 
     const photoImage = useRef();
@@ -31,12 +31,12 @@ const SideProfile = ({active, changeSideProfileActive}) => {
                 const res = await uploadBytes(photoRef, imageData);
 
                 if(res) {
-                    const urlPhoto = await getUrlProfile(res.metadata.fullPath);
                     await updateDoc(doc(db, `users/${user.uid}`), {
-                        photo: urlPhoto
+                        photo: res.metadata.fullPath
                     }).then(() => {
                         console.log('Se actualizo la foto de perfil');
                     })
+                    setUserPhotoProfile(await getUrlProfile(res.metadata.fullPath));
                 }
             }
         }
@@ -46,7 +46,7 @@ const SideProfile = ({active, changeSideProfileActive}) => {
         <div className={active ? "SideProfile active" : "SideProfile"}>
             <AiOutlineArrowLeft onClick={() => changeSideProfileActive(false)} className='SideProfile__return Button--noBackground'/>
             <div className="SideProfile__profile">
-                <img src={userCurrent && userCurrent.photo} alt="" />
+                <img src={userCurrent && userPhotoProfile} alt="" />
                 <button onClick={changeClickPhoto} className='SideProfile__buttonChange'>Editar Perfil</button>
                 <input ref={photoImage} type="file" className='SideProfile__filebutton' onChange={changePhotoProfile} />
             </div>

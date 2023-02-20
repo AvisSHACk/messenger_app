@@ -10,18 +10,16 @@ import useGetUserLogged from "../hooks/useGetUserLogged";
 const Chat = ({changeSidebarActive}) => {
 
     const {chatCurrent} = useGetChatCurrent();
-    const [messages, loading] = useGetMessages(chatCurrent?.id);
+    const [messages, loading] = useGetMessages(chatCurrent?.chat.id);
     const anchor = useRef();
 
-    const userCurrent = useGetUserLogged();
+    const {userCurrent} = useGetUserLogged();
 
     useEffect(() => {
         if(!loading) {
             anchor.current.scrollIntoView()
         }
     }, [loading])
-
-
     if(!chatCurrent){
         return (
             <main className="Chat">
@@ -43,7 +41,7 @@ const Chat = ({changeSidebarActive}) => {
                     <AiOutlineArrowLeft/>
                 </span>
                 <h2 className="Chat__name">
-                    {chatCurrent && filterNameContact(chatCurrent.names, userCurrent.name)}
+                    {chatCurrent && filterNameContact(chatCurrent.chat.names, userCurrent.name)}
                 </h2>
             </header>
             <div className="Chat__messages">
@@ -55,7 +53,7 @@ const Chat = ({changeSidebarActive}) => {
                 
                 <div ref={anchor}></div>
             </div>
-            <FormSend chatCurrent={chatCurrent} userLogged={userCurrent} anchor={anchor}/>
+            <FormSend chatCurrent={chatCurrent.chat} userLogged={userCurrent} anchor={anchor}/>
         </main>
      );
 }

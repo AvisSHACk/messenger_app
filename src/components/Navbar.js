@@ -4,8 +4,8 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import useGetUserLogged from "../hooks/useGetUserLogged";
 
 const NavBar = ({navbarisActive, changeNavbarisActive, changeSideProfileActive}) => {
-
-    const userCurrent = useGetUserLogged();
+    
+    const {userCurrent, userPhotoProfile} = useGetUserLogged();
 
     const handleAdd = async () => {
         let newEmail = prompt('Escribe el correo');
@@ -23,7 +23,7 @@ const NavBar = ({navbarisActive, changeNavbarisActive, changeSideProfileActive})
         
         changeNavbarisActive(false);
         const [newChat] = await getUser(newEmail);
-        addChat([newChat.name, userCurrent.name], [userCurrent.email, newChat.email,], newChat.photo);
+        addChat([newChat.name, userCurrent.name], [userCurrent.email, newChat.email,], [newChat.photo, userCurrent.photo]);
     }
     
     const handleImage = () => {
@@ -36,7 +36,7 @@ const NavBar = ({navbarisActive, changeNavbarisActive, changeSideProfileActive})
             <span className="Button--accent" onClick={() => handleAdd()}><AiOutlinePlus/></span>
             <img 
                 className="Navbar__profile" 
-                src={userCurrent && userCurrent.photo} 
+                src={userPhotoProfile} 
                 onClick={handleImage}
                 alt=""
             />
