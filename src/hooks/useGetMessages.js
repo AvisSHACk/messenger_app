@@ -6,7 +6,6 @@ const useGetMessages = (id) => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         if(id) {
-            console.log(id);
             getMessages(id, setMessages, setLoading);
         }
     }, [id])

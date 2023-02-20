@@ -11,7 +11,7 @@ const Contact = ({userLogged, chat, active, changeSidebarActive}) => {
     useEffect(() => {
         const execute = async () => {
             let contactoProfile = "";
-
+            console.log("das");
             try {
                 contactoProfile = await getUrlProfile(filterProfileContact(chat.photos, userLogged.photo));
             } catch (e) {
