@@ -1,11 +1,11 @@
 import { addChat, getUser } from "../firebase/firebaseFunctions";
 import Logout from "./elements/Logout";
 import { AiOutlinePlus } from 'react-icons/ai';
-import useGetUserLogged from "../hooks/useGetUserLogged";
+import { useAuth } from "../context/authContext";
 
 const NavBar = ({navbarisActive, changeNavbarisActive, changeSideProfileActive}) => {
     
-    const {userCurrent, userPhotoProfile} = useGetUserLogged();
+    const {userCollection, userPhotoUrl} = useAuth();
 
     const handleAdd = async () => {
         let newEmail = prompt('Escribe el correo');
@@ -16,14 +16,14 @@ const NavBar = ({navbarisActive, changeNavbarisActive, changeSideProfileActive})
             return;
         }
         
-        if(newEmail === userCurrent.email) {
+        if(newEmail === userCollection.email) {
             alert('Ingresa un correo diferente al  tuyo no seas Gil xd');
             return;
         }
         
         changeNavbarisActive(false);
         const [newChat] = await getUser(newEmail);
-        addChat([newChat.name, userCurrent.name], [userCurrent.email, newChat.email,], [newChat.photo, userCurrent.photo]);
+        addChat([newChat.name, userCollection.name], [userCollection.email, newChat.email,], [newChat.photo, userCollection.photo]);
     }
     
     const handleImage = () => {
@@ -36,7 +36,7 @@ const NavBar = ({navbarisActive, changeNavbarisActive, changeSideProfileActive})
             <span className="Button--accent" onClick={() => handleAdd()}><AiOutlinePlus/></span>
             <img 
                 className="Navbar__profile" 
-                src={userPhotoProfile} 
+                src={userPhotoUrl} 
                 onClick={handleImage}
                 alt=""
             />

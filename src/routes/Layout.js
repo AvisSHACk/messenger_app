@@ -4,7 +4,6 @@ import Navbar from "./../components/Navbar";
 import Sidebar from "./../components/Sidebar";
 import { ChatsProvider } from "../context/chatsContext";
 import {ChatCurrentProvider} from "../context/chatCurrentContext";
-import {UserCurrentProvider} from "../context/userCurrentContext";
 // import { useAuth } from "../context/authContext";
 
 // import {getToken, onMessage} from "firebase/messaging";
@@ -46,27 +45,25 @@ const Layout = () => {
     return(
         <ChatsProvider>
             {/* <ToastContainer /> */}
-            <UserCurrentProvider>
-                <ChatCurrentProvider>
-                    <Navbar 
-                        navbarisActive={navbarisActive}
-                        changeNavbarisActive={changeNavbarisActive}
-                        changeSideProfileActive={changeSideProfileActive}
-                    />
+            <ChatCurrentProvider>
+                <Navbar 
+                    navbarisActive={navbarisActive}
+                    changeNavbarisActive={changeNavbarisActive}
+                    changeSideProfileActive={changeSideProfileActive}
+                />
                     
-                    <Sidebar 
-                        navbarisActive={navbarisActive}
-                        changeNavbarisActive={changeNavbarisActive}
-                        sidebarActive={sidebarActive}
-                        changeSidebarActive={changeSidebarActive}
-                        sideProfileActive={sideProfileActive}
-                        changeSideProfileActive={changeSideProfileActive}
-                    />
-                    <Chat 
-                        changeSidebarActive={changeSidebarActive}
-                    />
-                </ChatCurrentProvider>
-            </UserCurrentProvider>
+                <Sidebar 
+                    navbarisActive={navbarisActive}
+                    changeNavbarisActive={changeNavbarisActive}
+                    sidebarActive={sidebarActive}
+                    changeSidebarActive={changeSidebarActive}
+                    sideProfileActive={sideProfileActive}
+                    changeSideProfileActive={changeSideProfileActive}
+                />
+                <Chat 
+                    changeSidebarActive={changeSidebarActive}
+                />
+            </ChatCurrentProvider>
         </ChatsProvider>
     )
 }

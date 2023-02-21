@@ -30,7 +30,7 @@ const getUserLogged = async (user, changeUserCurrent) => {
 
 }
 
-// const getUserLogged = async (user) => {
+// const getUserLoggedd = async (user) => {
 
 //     const userRef = doc(db, `users/${user.uid}`);
 //     const userCollection = await getDoc(userRef);
@@ -40,13 +40,22 @@ const getUserLogged = async (user, changeUserCurrent) => {
 // }
 
 const getUrlProfile = async (routePhoto) => {
-    const refPhoto = ref(storage, routePhoto);
-    const urlPhoto = await getDownloadURL(refPhoto);
-    return urlPhoto;
+    // const refPhoto = ref(storage, routePhoto);
+
+    try {
+        const refPhoto = ref(storage, routePhoto);
+        const urlPhoto = await getDownloadURL(refPhoto);
+        return urlPhoto;
+    } catch (error) {
+        const refPhoto = ref(storage, 'guest.png');
+        const urlPhoto = await getDownloadURL(refPhoto);
+        return urlPhoto;
+    }
 }
 
-const getChats = (setChats, setLoading) => {
-    const onSuscribe = onSnapshot(collection(db, 'chats'), ( snapashot ) => {
+const getChats = (setChats, email, setLoading) => {
+    const q = query(collection(db, "chats"), where("emails", "array-contains", email));
+    const onSuscribe = onSnapshot(q, ( snapashot ) => {
         setChats(snapashot.docs.map((chat) => {
             return {...chat.data(), id: chat.id};
         }));
@@ -114,5 +123,6 @@ export {
     getUser, 
     addChat,
     addMessage,
-    getMessages
+    getMessages,
+    // getUserLoggedd
 };

@@ -7,16 +7,9 @@ import filterProfileContact from "../utils/filterProfileContact";
 const Contact = ({userLogged, chat, active, changeSidebarActive}) => {
     const [profileContacto, setProfileContacto] = useState();
     const {changeChatCurrent} = useGetChatCurrent();
-    console.log(userLogged);
     useEffect(() => {
         const execute = async () => {
-            let contactoProfile = "";
-            console.log("das");
-            try {
-                contactoProfile = await getUrlProfile(filterProfileContact(chat.photos, userLogged.photo));
-            } catch (e) {
-                contactoProfile = await getUrlProfile('guest.png');
-            }
+            let contactoProfile = await getUrlProfile(filterProfileContact(chat.photos, userLogged.photo));
             setProfileContacto(contactoProfile);
         }
         execute();

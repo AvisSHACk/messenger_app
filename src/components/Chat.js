@@ -5,7 +5,7 @@ import { useEffect, useRef} from "react";
 import FormSend from "./FormSend";
 import useGetMessages from "../hooks/useGetMessages";
 import useGetChatCurrent from "../hooks/useGetChatCurrent";
-import useGetUserLogged from "../hooks/useGetUserLogged";
+import { useAuth } from "../context/authContext";
 
 const Chat = ({changeSidebarActive}) => {
 
@@ -13,7 +13,7 @@ const Chat = ({changeSidebarActive}) => {
     const [messages, loading] = useGetMessages(chatCurrent?.chat.id);
     const anchor = useRef();
 
-    const {userCurrent} = useGetUserLogged();
+    const {userCollection} = useAuth();
 
     useEffect(() => {
         if(!loading) {
@@ -41,19 +41,19 @@ const Chat = ({changeSidebarActive}) => {
                     <AiOutlineArrowLeft/>
                 </span>
                 <h2 className="Chat__name">
-                    {chatCurrent && filterNameContact(chatCurrent.chat.names, userCurrent.name)}
+                    {chatCurrent && filterNameContact(chatCurrent.chat.names, userCollection.name)}
                 </h2>
             </header>
             <div className="Chat__messages">
                 {!loading ?
-                    messages.map((message) => <Message key={message.id} message={message} userLogged={userCurrent}/>)
+                    messages.map((message) => <Message key={message.id} message={message} userLogged={userCollection}/>)
                 :
                     <div className="loader"></div>
                 }
                 
                 <div ref={anchor}></div>
             </div>
-            <FormSend chatCurrent={chatCurrent.chat} userLogged={userCurrent} anchor={anchor}/>
+            <FormSend chatCurrent={chatCurrent.chat} userLogged={userCollection} anchor={anchor}/>
         </main>
      );
 }

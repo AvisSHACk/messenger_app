@@ -1,14 +1,14 @@
 import SideContact from "./SideContact.js";
-import useGetUserLogged from "../hooks/useGetUserLogged";
 import SideProfile from "./SideProfile.js";
+import { useAuth } from "../context/authContext";
 
 
 const Sidebar = ({navbarisActive, changeNavbarisActive, sidebarActive, changeSidebarActive, sideProfileActive, changeSideProfileActive}) => {
-    const {userCurrent} = useGetUserLogged();
+    const {userCollection} = useAuth();
     return ( 
         <aside className={sidebarActive ? 'Sidebar active' : 'Sidebar'}>
             <SideContact 
-                userCurrent={userCurrent}
+                userCurrent={userCollection}
                 navbarisActive={navbarisActive}
                 changeNavbarisActive={changeNavbarisActive}
                 changeSidebarActive={changeSidebarActive}

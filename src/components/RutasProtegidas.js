@@ -3,7 +3,6 @@ import { useAuth } from "../context/authContext";
 
 const RutasProtegidas = () => {
     const {user} = useAuth();
-
     if(user) {
         return <Outlet />
     } else {
