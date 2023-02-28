@@ -1,8 +1,6 @@
-import { ref, storage, uploadBytes  } from './../firebase/storage';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useAuth } from '../context/authContext';
-import { db, doc, updateDoc } from '../firebase/firestore';
-import { getUrlProfile } from '../firebase/firebaseFunctions';
+import { getUrlProfile, uploadPhoto, uploadPhotoDoc } from '../firebase/firebaseFunctions';
 import { useRef } from 'react';
 const SideProfile = ({active, changeSideProfileActive}) => {
     const {user, 
@@ -26,19 +24,13 @@ const SideProfile = ({active, changeSideProfileActive}) => {
 
             fileReader.onload = async () => {
                 const imageData = fileReader.result;
-
-                const photoRef = ref(storage, `${user.uid}`);
-
-                const res = await uploadBytes(photoRef, imageData);
+                const res = await uploadPhoto(user.uid, imageData);
 
                 if(res) {
-                    await updateDoc(doc(db, `users/${user.uid}`), {
-                        photo: res.metadata.fullPath
-                    }).then(() => {
-                        console.log('Se actualizo la foto de perfil');
-                    })
+                    uploadPhotoDoc(res, user.uid);
                     changeUserPhotoUrl(await getUrlProfile(res.metadata.fullPath));
                 }
+
             }
         }
 

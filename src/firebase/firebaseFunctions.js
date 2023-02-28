@@ -1,12 +1,12 @@
 import { orderBy } from "firebase/firestore";
 import { auth, createUserWithEmailAndPassword } from "./auth";
-import {db, doc, setDoc, onSnapshot, collection,
+import {db, doc, setDoc, onSnapshot, collection, updateDoc,
     query, 
     where,
     getDocs,
     addDoc,
     serverTimestamp } from "./firestore";
-import { storage, getDownloadURL, ref } from "./storage";
+import { storage, getDownloadURL, ref, uploadBytes } from "./storage";
 
 const createUser = async (name, email, password) => {
     const user = await createUserWithEmailAndPassword(auth, email, password);
@@ -115,6 +115,21 @@ const getMessages = (id, setMessages, setLoading) => {
     return onSuscribe;
 }
 
+const uploadPhoto = async (refPhoto, imageData) => {
+    const photoRef = ref(storage, `${refPhoto}`);
+    const res = await uploadBytes(photoRef, imageData);
+
+    return res;
+}
+
+const uploadPhotoDoc = async (res, id) => {
+    await updateDoc(doc(db, `users/${id}`), {
+        photo: res.metadata.fullPath
+    }).then(() => {
+        console.log('Se actualizo la foto de perfil');
+    })
+}
+
 export {
     createUser, 
     getUrlProfile, 
@@ -124,5 +139,7 @@ export {
     addChat,
     addMessage,
     getMessages,
+    uploadPhoto,
+    uploadPhotoDoc
     // getUserLoggedd
 };
