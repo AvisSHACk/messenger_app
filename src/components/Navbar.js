@@ -5,8 +5,7 @@ import { useAuth } from "../context/authContext";
 
 const NavBar = ({navbarisActive, changeNavbarisActive, changeSideProfileActive}) => {
     
-    const {userCollection, userPhotoUrl} = useAuth();
-
+    const {user, userCollection} = useAuth();
     const handleAdd = async () => {
         let newEmail = prompt('Escribe el correo');
 
@@ -23,20 +22,19 @@ const NavBar = ({navbarisActive, changeNavbarisActive, changeSideProfileActive})
         
         changeNavbarisActive(false);
         const [newChat] = await getUser(newEmail);
-        addChat([newChat.name, userCollection.name], [userCollection.email, newChat.email,], [newChat.photo, userCollection.photo]);
+        addChat([newChat.id, user.uid]);
     }
     
     const handleImage = () => {
         changeSideProfileActive(true);
         changeNavbarisActive(false);
     }
-    
     return(
         <nav className={navbarisActive ? 'Navbar active' : 'Navbar'}>
             <span className="Button--accent" onClick={() => handleAdd()}><AiOutlinePlus/></span>
             <img 
-                className="Navbar__profile" 
-                src={userPhotoUrl} 
+                className="Navbar__profile"
+                src={userCollection?.photo}
                 onClick={handleImage}
                 alt=""
             />

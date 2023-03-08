@@ -9,7 +9,7 @@ const ChatsProvider = ({children}) => {
     const {user} = useAuth();
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        getChats(setChats, user.email ,setLoading);
+        getChats(setChats, user.uid ,setLoading);
 
     }, [user])
     return (

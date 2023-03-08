@@ -3,7 +3,6 @@ import { FiSend } from 'react-icons/fi';
 import { MdTagFaces } from 'react-icons/md';
 import { addMessage } from '../firebase/firebaseFunctions';
 import useActivateButtonDisabled from '../hooks/useActivateButtonDisabled';
-import filterNameContact from '../utils/filterNameContact';
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 
@@ -20,11 +19,10 @@ const FormSend = ({chatCurrent, userLogged, anchor}) => {
     }
     
     const onSend = (e) => {
-        e.preventDefault();        
-        const email = filterNameContact(chatCurrent.emails, userLogged.email)
+        e.preventDefault();
         setMessage('');
         changesendDisabled(true);
-        addMessage(chatCurrent.id, message, email, userLogged.photo);
+        addMessage(chatCurrent.id, message, userLogged.email, userLogged.photo);
     }
 
     useEffect(() => {

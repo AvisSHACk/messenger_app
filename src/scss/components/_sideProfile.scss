@@ -12,6 +12,10 @@
     padding: 2rem 1rem;
     transition: left .2s;
 
+    &__profile {
+        width: 100%;
+    }
+
     &__return {
         margin-right: auto;
     }
@@ -21,11 +25,17 @@
     }
 
     img {
-        // width: auto;
-        width: 50px;
-        height: 50px;
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
         margin: 2rem auto 1rem;
+        cursor: pointer;
+        object-fit: cover;
+    }
+
+    &__label {
+        display: block;
+        margin-bottom: 1rem;
     }
 
     &__filebutton {
@@ -38,5 +48,7 @@
         padding: 1rem 4rem;
         border-radius: 8px;
         cursor: pointer;
+        display: table;
+        margin: 1rem auto 0;
     }
 }

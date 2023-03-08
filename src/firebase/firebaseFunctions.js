@@ -14,7 +14,7 @@ const createUser = async (name, email, password) => {
     await setDoc(doc(db, `users/${user.user.uid}`), {
         name: name,
         email: email,
-        photo: user.user.uid
+        photo: await getUrlProfile('guest.png')
     });
     
 }
@@ -53,8 +53,8 @@ const getUrlProfile = async (routePhoto) => {
     }
 }
 
-const getChats = (setChats, email, setLoading) => {
-    const q = query(collection(db, "chats"), where("emails", "array-contains", email));
+const getChats = (setChats, id, setLoading) => {
+    const q = query(collection(db, "chats"), where("ids", "array-contains", id));
     const onSuscribe = onSnapshot(q, ( snapashot ) => {
         setChats(snapashot.docs.map((chat) => {
             return {...chat.data(), id: chat.id};
@@ -75,17 +75,22 @@ const getUser = async (email) => {
 
     // return user;
     return userCollection.docs.map((user) => {
-        return user.data();
+        return {...user.data(), id: user.id};
     });
 }
 
-const addChat = async (usersNames, userEmails, usersPhoto) => {
+const getUserById = async (id, setContactChat) => {
+    const q = doc(db, `users/${id}`);
+    const onSuscribe = onSnapshot(q, ( snapashot ) => {
+        setContactChat({...snapashot.data(), id: snapashot.id});
+    })
+
+    return onSuscribe;
+}
+
+const addChat = async (ids) => {
     await addDoc(collection(db, `chats`), {
-
-        names: usersNames,
-        emails: userEmails,
-        photos: usersPhoto
-
+        ids: ids,
     });
 }
 
@@ -122,9 +127,9 @@ const uploadPhoto = async (refPhoto, imageData) => {
     return res;
 }
 
-const uploadPhotoDoc = async (res, id) => {
+const uploadPhotoDoc = async (photo, id) => {
     await updateDoc(doc(db, `users/${id}`), {
-        photo: res.metadata.fullPath
+        photo: photo
     }).then(() => {
         console.log('Se actualizo la foto de perfil');
     })
@@ -140,6 +145,7 @@ export {
     addMessage,
     getMessages,
     uploadPhoto,
-    uploadPhotoDoc
+    uploadPhotoDoc,
+    getUserById
     // getUserLoggedd
 };

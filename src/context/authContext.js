@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, onAuthStateChanged } from "../firebase/auth";
-import { getUrlProfile, getUserLogged } from "../firebase/firebaseFunctions";
+import { getUserLogged } from "../firebase/firebaseFunctions";
 
 const AuthContext = createContext();
 const useAuth = () => {
@@ -19,8 +19,8 @@ const AuthProvider = ({children}) => {
             changeUsuario(userCurrent);
             if(userCurrent) {
                 await getUserLogged(userCurrent, changeUserCollection);
-                let urlProfile = await getUrlProfile(userCurrent.uid);
-                changeUserPhotoUrl(urlProfile);
+                // let urlProfile = await getUrlProfile(userCurrent.uid);
+                // changeUserPhotoUrl(urlProfile);
             }
 
             changeLoading(false);

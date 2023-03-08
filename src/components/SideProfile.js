@@ -1,19 +1,38 @@
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useAuth } from '../context/authContext';
 import { getUrlProfile, uploadPhoto, uploadPhotoDoc } from '../firebase/firebaseFunctions';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { db, doc, updateDoc } from '../firebase/firestore';
 const SideProfile = ({active, changeSideProfileActive}) => {
+
+    
     const {user, 
-        userCollection, 
-        userPhotoUrl, 
-        changeUserPhotoUrl} = useAuth();
+        userCollection
+        } = useAuth();
+
+    const [name, changeName] = useState('')
 
     const photoImage = useRef();
+    
+    useEffect(() => {
+        if(userCollection) {
+            changeName(userCollection.name);
+        }
+    }, [userCollection])
 
     const changeClickPhoto = () => {
         photoImage.current.click();
     }
 
+    const changeUseDoc = async (e) => {
+        e.preventDefault();
+        console.log(name);
+        const userRef = doc(db, `users/${user.uid}`);
+        await updateDoc(userRef, {
+            name: name
+        });
+    }
+    
     const changePhotoProfile = (e) => {
 
         const files = e.target.files;
@@ -27,8 +46,8 @@ const SideProfile = ({active, changeSideProfileActive}) => {
                 const res = await uploadPhoto(user.uid, imageData);
 
                 if(res) {
-                    uploadPhotoDoc(res, user.uid);
-                    changeUserPhotoUrl(await getUrlProfile(res.metadata.fullPath));
+                    let photoUrl = await getUrlProfile(res.metadata.fullPath);
+                    uploadPhotoDoc(photoUrl, user.uid);
                 }
 
             }
@@ -39,9 +58,13 @@ const SideProfile = ({active, changeSideProfileActive}) => {
         <div className={active ? "SideProfile active" : "SideProfile"}>
             <AiOutlineArrowLeft onClick={() => changeSideProfileActive(false)} className='SideProfile__return Button--noBackground'/>
             <div className="SideProfile__profile">
-                <img src={userCollection && userPhotoUrl} alt="" />
-                <button onClick={changeClickPhoto} className='SideProfile__buttonChange'>Editar Perfil</button>
+                {/* <img src={userCollection && userPhotoUrl} alt="" onClick={changeClickPhoto}/> */}
+                <img src={userCollection?.photo} alt="" onClick={changeClickPhoto}/>
                 <input ref={photoImage} type="file" className='SideProfile__filebutton' onChange={changePhotoProfile} />
+                <form action="" className='Form Form--sideProfile'>
+                    <input type="text" className="Form__input" id="name" name='name' value={name} onChange={(e) => changeName(e.target.value)}/>
+                    <button onClick={changeUseDoc} className='SideProfile__buttonChange'>Editar Perfil</button>
+                </form>
             </div>
         </div>
      );

@@ -1,6 +1,5 @@
 import Message from "./Message";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import filterNameContact from "../utils/filterNameContact";
 import { useEffect, useRef} from "react";
 import FormSend from "./FormSend";
 import useGetMessages from "../hooks/useGetMessages";
@@ -30,7 +29,6 @@ const Chat = ({changeSidebarActive}) => {
         )
     }
 
-
     return ( 
         <main className="Chat">
             <header className="Chat__header">
@@ -41,7 +39,7 @@ const Chat = ({changeSidebarActive}) => {
                     <AiOutlineArrowLeft/>
                 </span>
                 <h2 className="Chat__name">
-                    {chatCurrent && filterNameContact(chatCurrent.chat.names, userCollection.name)}
+                    {chatCurrent && chatCurrent.contactChat.name}
                 </h2>
             </header>
             <div className="Chat__messages">

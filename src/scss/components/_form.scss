@@ -17,7 +17,7 @@
     @extend %form;  
 }
   
-.Form {
+.Form{
   @extend %form;
 
     &--chat {
@@ -25,6 +25,12 @@
         align-items: center;
         justify-content: space-between;
         padding: 0 2rem;
+    }
+
+    &--sideProfile {
+        width: 100%;
+        padding-left: 1rem;
+        padding-bottom: 1rem;
     }
 
     &--access {

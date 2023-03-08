@@ -4,11 +4,11 @@ import { useAuth } from "../context/authContext";
 
 
 const Sidebar = ({navbarisActive, changeNavbarisActive, sidebarActive, changeSidebarActive, sideProfileActive, changeSideProfileActive}) => {
-    const {userCollection} = useAuth();
+    const {user} = useAuth();
     return ( 
         <aside className={sidebarActive ? 'Sidebar active' : 'Sidebar'}>
             <SideContact 
-                userCurrent={userCollection}
+                userCurrent={user}
                 navbarisActive={navbarisActive}
                 changeNavbarisActive={changeNavbarisActive}
                 changeSidebarActive={changeSidebarActive}
