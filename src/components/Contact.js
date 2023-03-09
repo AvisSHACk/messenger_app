@@ -15,7 +15,7 @@ const Contact = ({userLogged, chat, active, changeSidebarActive}) => {
     }, [chat, userLogged, contactChat?.photo])
 
     const handleClick = (chat) => {
-        changeChatCurrent({chat, contactChat});
+        changeChatCurrent(chat);
         changeSidebarActive(false);
     }
     

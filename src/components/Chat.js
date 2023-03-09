@@ -8,8 +8,8 @@ import { useAuth } from "../context/authContext";
 
 const Chat = ({changeSidebarActive}) => {
 
-    const {chatCurrent} = useGetChatCurrent();
-    const [messages, loading] = useGetMessages(chatCurrent?.chat.id);
+    const {chatCurrent, contactCurrent} = useGetChatCurrent();
+    const [messages, loading] = useGetMessages(chatCurrent?.id);
     const anchor = useRef();
 
     const {userCollection} = useAuth();
@@ -19,6 +19,8 @@ const Chat = ({changeSidebarActive}) => {
             anchor.current.scrollIntoView()
         }
     }, [loading])
+
+    console.log(chatCurrent);
     if(!chatCurrent){
         return (
             <main className="Chat">
@@ -39,7 +41,7 @@ const Chat = ({changeSidebarActive}) => {
                     <AiOutlineArrowLeft/>
                 </span>
                 <h2 className="Chat__name">
-                    {chatCurrent && chatCurrent.contactChat.name}
+                    {contactCurrent && contactCurrent.name}
                 </h2>
             </header>
             <div className="Chat__messages">
@@ -51,7 +53,7 @@ const Chat = ({changeSidebarActive}) => {
                 
                 <div ref={anchor}></div>
             </div>
-            <FormSend chatCurrent={chatCurrent.chat} userLogged={userCollection} anchor={anchor}/>
+            <FormSend chatCurrent={chatCurrent} userLogged={userCollection} anchor={anchor}/>
         </main>
      );
 }
