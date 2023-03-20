@@ -19,8 +19,7 @@ const Chat = ({changeSidebarActive}) => {
             anchor.current.scrollIntoView()
         }
     }, [loading])
-
-    console.log(chatCurrent);
+    
     if(!chatCurrent){
         return (
             <main className="Chat">

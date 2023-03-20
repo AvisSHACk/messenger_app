@@ -13,7 +13,6 @@ const Contact = ({userLogged, chat, active, changeSidebarActive}) => {
         }
         execute();
     }, [chat, userLogged, contactChat?.photo])
-
     const handleClick = (chat) => {
         changeChatCurrent(chat);
         changeSidebarActive(false);

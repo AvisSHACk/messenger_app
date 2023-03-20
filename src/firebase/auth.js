@@ -1,10 +1,11 @@
 import { app } from "./firebaseConfig";
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateEmail } from "firebase/auth";
 const auth = getAuth(app);
 
 export {
     auth,
     onAuthStateChanged,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    updateEmail
 }
