@@ -1,5 +1,5 @@
 import { orderBy } from "firebase/firestore";
-import { auth, createUserWithEmailAndPassword } from "./auth";
+import { auth, createUserWithEmailAndPassword, updateEmail } from "./auth";
 import {db, doc, setDoc, onSnapshot, collection, updateDoc,
     query, 
     where,
@@ -23,7 +23,7 @@ const createUser = async (name, email, password) => {
 const getUserLogged = async (user, changeUserCurrent) => {
 
     const onSuscribe = onSnapshot(doc(db, `users/${user.uid}`), ( snapashot ) => {
-        changeUserCurrent(snapashot.data());
+        changeUserCurrent({...snapashot.data(), id: snapashot.id});
     })
 
     return onSuscribe;
@@ -94,11 +94,11 @@ const addChat = async (ids) => {
     });
 }
 
-const addMessage = async (id, message, email, photo) => {
+const addMessage = async (id, message, uid, photo) => {
     await addDoc(collection(db, `chats/${id}/mensajes`), {
 
         name: 'nombre',
-        email: email,
+        uid: uid,
         message: message,
         photos: photo,
         timeStamp: serverTimestamp()
@@ -135,6 +135,22 @@ const uploadPhotoDoc = async (photo, id) => {
     })
 }
 
+const updateProfile = async (user, name, email) => {
+    const userRef = doc(db, `users/${user.uid}`);
+    await updateDoc(userRef, {
+        name: name,
+        email: email
+    });
+}
+
+const updateEmailFirebase = async (user, email) => {
+    updateEmail(user, email).then(() => {
+      console.log('Email Actualizado')
+    }).catch((error) => {
+      console.log(error)
+    });
+}
+
 export {
     createUser, 
     getUrlProfile, 
@@ -146,6 +162,8 @@ export {
     getMessages,
     uploadPhoto,
     uploadPhotoDoc,
-    getUserById
+    getUserById,
+    updateProfile,
+    updateEmailFirebase
     // getUserLoggedd
 };

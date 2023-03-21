@@ -15,6 +15,7 @@ const Alerta = ({tipo, mensaje, estadoAlerta, setEstadoAlerta}) => {
             return (() => clearTimeout(tiempo))
 
     }, [estadoAlerta, setEstadoAlerta])
+    // console.log(estadoAlerta);
     return (
         <>
             {estadoAlerta &&

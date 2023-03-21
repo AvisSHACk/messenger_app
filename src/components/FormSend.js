@@ -22,7 +22,7 @@ const FormSend = ({chatCurrent, userLogged, anchor}) => {
         e.preventDefault();
         setMessage('');
         changesendDisabled(true);
-        addMessage(chatCurrent.id, message, userLogged.email, userLogged.photo);
+        addMessage(chatCurrent.id, message, userLogged.id, userLogged.photo);
     }
 
     useEffect(() => {
